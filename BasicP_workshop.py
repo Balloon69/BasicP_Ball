@@ -23,18 +23,17 @@ while True:
             elif weapon == "spear":
                 monster = monster - spear
                 print(monster)
-            
-    else:
-        print("หนี")  
-                
-    if monster > 0 :
-        print("not die")
-    elif monster < 0:
-        print("ยังไม่ตาย")
-        monster = 20
-
-                     
-            
-
+        
+                    
+            if monster < 0 :
+                monster = 20
+                print(monster)
+            elif monster == 0:
+                print("win")
+                break
+        print("lose")
+        break
+    elif option == 2:
+        break
 
     
