@@ -27,7 +27,12 @@ while True:
     else:
         print("หนี")  
                 
-            
+    if monster > 0 :
+        print("not die")
+    elif monster < 0:
+        print("ยังไม่ตาย")
+        monster = 20
+
                      
             
 
