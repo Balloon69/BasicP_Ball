@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ร้านพี่ปลิ้ม - กะเพราเด็ด</title>
+  <style>
+    body {
+      font-family: "Sarabun", sans-serif;
+      background-color: #fffdee;
+      color: #333;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #c1440e;
+    }
+    .menu-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #c1440e;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ffe0b2;
+    }
+  </style>
+</head>
+<body>
+  <h1>ร้านพี่ปลิ้ม กะเพราจัดจ้าน!</h1>
+  <h2>เมนูอาหาร</h2>
+  <div class="menu">
+    <div class="menu-item">1. กะเพราหมูกรอบ - 600 บาท</div>
+    <div class="menu-item">2. กะเพราหมู - 550 บาท</div>
+    <div class="menu-item">3. กะเพราไก่ - 500 บาท</div>
+    <div class="menu-item">4. กะเพราเนื้อ - 900 บาท</div>
+    <div class="menu-item">5. กะเพราทะเล - 800 บาท</div>
+  </div>
+
+  <form id="orderForm">
+    <label>เลือกเมนู (พิมพ์หมายเลข): 
+      <input type="number" id="menu" min="1" max="5" required>
+    </label>
+
+    <label>เพิ่มไข่ดาวไหม:
+      <select id="egg">
+        <option value="0">ไม่เพิ่ม</option>
+        <option value="150">เพิ่ม (เพิ่ม 150 บาท)</option>
+      </select>
+    </label>
+
+    <label>กินที่ร้านหรือกลับบ้าน:
+      <select id="place">
+        <option value="ร้าน">กินที่ร้าน</option>
+        <option value="กลับบ้าน">กลับบ้าน</option>
+      </select>
+    </label>
+
+    <label>ช่องทางชำระเงิน:
+      <select id="payMethod">
+        <option value="scan">สแกนจ่าย</option>
+        <option value="cash">เงินสด</option>
+      </select>
+    </label>
+
+    <div id="cashInput" style="display: none;">
+      <label>กรอกจำนวนเงินสด (บาท): 
+        <input type="number" id="cashAmount">
+      </label>
+    </div>
+
+    <button type="submit">ยืนยันการสั่งซื้อ</button>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    const menuPrices = {
+      1: 600,
+      2: 550,
+      3: 500,
+      4: 900,
+      5: 800
+    };
+
+    const form = document.getElementById('orderForm');
+    const result = document.getElementById('result');
+    const payMethod = document.getElementById('payMethod');
+    const cashInput = document.getElementById('cashInput');
+
+    payMethod.addEventListener('change', () => {
+      cashInput.style.display = payMethod.value === 'cash' ? 'block' : 'none';
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const menu = parseInt(document.getElementById('menu').value);
+      const egg = parseInt(document.getElementById('egg').value);
+      const place = document.getElementById('place').value;
+      const payment = payMethod.value;
+      const cashAmount = parseInt(document.getElementById('cashAmount').value || 0);
+
+      if (!menuPrices[menu]) {
+        result.innerHTML = "ไม่มีเมนูนี้ค่ะ";
+        return;
+      }
+
+      const basePrice = menuPrices[menu];
+      const total = basePrice + egg;
+
+      let message = `เมนูที่สั่ง: ${menu} (ราคา ${basePrice} บาท)<br>`;
+      message += egg > 0 ? "เพิ่มไข่ดาว (+150 บาท)<br>" : "ไม่เพิ่มไข่ดาว<br>";
+      message += `รวมเป็นเงิน: ${total} บาท<br>`;
+      message += `รับประทาน: ${place}<br>`;
+
+      if (payment === 'cash') {
+        if (cashAmount >= total) {
+          message += `จ่ายเงินสด ${cashAmount} บาท<br>เงินทอน: ${cashAmount - total} บาท<br>`;
+        } else {
+          message += `ยอดเงินไม่พอ ขาดอีก ${total - cashAmount} บาท<br>`;
+        }
+      } else {
+        message += `กรุณาสแกนจ่ายเงินจำนวน ${total} บาท ขอบคุณค่ะ`;
+      }
+
+      result.innerHTML = message;
+    });
+  </script>
+</body>
+</html>

@@ -1,20 +1,32 @@
 # ฟังก์ชันแสดงรายชื่อหนังทั้งหมดในระบบ
+movies = [
+    {'movie_name': 'Avengers Endgame', 'ticket_price': 300, 'genre': 'Action', 'age_restriction': '13'},
+    {'movie_name': 'Inception', 'ticket_price': 280, 'genre': 'Sci-Fi', 'age_restriction': '13'},
+    {'movie_name': 'It', 'ticket_price': 180, 'genre': 'Horror', 'age_restriction': '18'},
+    {'movie_name': 'The Notebook', 'ticket_price': 250, 'genre': 'Romantic', 'age_restriction': '13'},
+    {'movie_name': 'Harry Potter and the Sorcerer\'s Stone', 'ticket_price': 260, 'genre': 'Fantasy', 'age_restriction': 'G'}
+]
 def show_movies(movie_list):
     # TODO: วนลูปแสดงชื่อหนังพร้อมราคาตั๋ว
     for i in  movie_list:
-        return(movie_list(['movie_name','ticket_price']))
-print(show_movies)
+        print(i['movie_name'],i['ticket_price'])
+    
+print(show_movies(movies))
+
 # # ฟังก์ชันตรวจสอบอายุตามข้อจำกัดของหนัง
 def check_age(user_age, age_restriction):
     # TODO: ถ้า age_restriction เป็น 'G' ให้ผ่านเลย
     # ถ้าไม่ใช่ ให้ดึงเลขอายุขั้นต่ำมาเปรียบเทียบกับ user_age
-    if age_restriction == 'G':
-        print("pass")
-    else:
-        if user_age >= age_restriction:
-            print("ดูได้")
+    for age in (user_age):
+        user_age = input("Enter age :")
+        if age_restriction == 'G':
+            print("pass")
+        elif user_age >= age_restriction:
+                print("ดูได้")
         else:
             print("ดูไม่ได้")
+
+print(check_age)
 
 # # ฟังก์ชันคำนวณราคาตั๋วโดยขึ้นกับประเภทหนัง
 def calculate_price(base_price, genre):
@@ -26,7 +38,7 @@ def calculate_price(base_price, genre):
         return base_price
 
 # # ฟังก์ชันสำหรับการซื้อบัตรชมหนัง
-def buy_ticket(movie_list):
+# def buy_ticket(movie_list):
 #     # TODO: 
 #     # 1. เรียก show_movies เพื่อแสดงรายชื่อหนัง
 #     # 2. รับค่าตัวเลือกหนังจากผู้ใช้ (1-5)
@@ -37,15 +49,9 @@ def buy_ticket(movie_list):
 #     # 6. คำนวณราคาตั๋วโดยใช้ calculate_price
 #     # 7. แสดงผลการซื้อบัตร พร้อมชื่อหนัง, เสียงที่เลือก, ราคาตั๋ว
 
-def main():
-#     # TODO: สร้างรายการหนังเป็น list ของ dict โดยเก็บข้อมูล movie_name, ticket_price, genre, age_restriction
-    movies = [
-        {'movie_name': 'Avengers Endgame', 'ticket_price': 300, 'genre': 'Action', 'age_restriction': '13'},
-        {'movie_name': 'Inception', 'ticket_price': 280, 'genre': 'Sci-Fi', 'age_restriction': '13'},
-        {'movie_name': 'It', 'ticket_price': 180, 'genre': 'Horror', 'age_restriction': '18'},
-        {'movie_name': 'The Notebook', 'ticket_price': 250, 'genre': 'Romantic', 'age_restriction': '13'},
-        {'movie_name': 'Harry Potter and the Sorcerer\'s Stone', 'ticket_price': 260, 'genre': 'Fantasy', 'age_restriction': 'G'}
-    ]
+# def main():
+    # TODO: สร้างรายการหนังเป็น list ของ dict โดยเก็บข้อมูล movie_name, ticket_price, genre, age_restriction
+
 
 #     # TODO: แสดงเมนูให้ผู้ใช้เลือก
 #     # 1. แสดงหนังทั้งหมด
